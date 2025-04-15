@@ -133,19 +133,7 @@ class DeleteEmployee(graphene.Mutation):
         except Employee.DoesNotExist:
             raise Exception("Employee not found")
         
-class DeleteHR(graphene.Mutation):
-    class Arguments:
-        hr_id = graphene.String(required=True)
 
-    hr = graphene.Field(HRType)
-
-    def mutate(self, info, hr_id):
-        try:
-            hr = HR.objects.get(hr_id=hr_id)
-            hr.delete()
-            return DeleteHR(hr=hr)
-        except HR.DoesNotExist:
-            raise Exception("HR not found")
 
 class Query(graphene.ObjectType):
     pass
